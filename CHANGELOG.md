@@ -1,4 +1,11 @@
 # Changelog
+## [4.0.0] Rodriguez Esteban - 2025-03-11
+
+### Changed
+- Removing Noetic workspace
+- Added ws.docker for building the Docker image
+- Added fastdds for ROS2 Bridge with Isaac Sim
+- Updated Dockerfile for building the ROS2 workspace
 
 
 ## [3.3.1] - 2025-01-24
