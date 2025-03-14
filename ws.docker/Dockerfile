@@ -74,7 +74,7 @@ RUN python3 -m pip install -U \
 
 RUN python3.10 -m pip uninstall numpy -y
 RUN python3.10 -m pip install --upgrade pip
-RUN python3.10 -m pip install numpy
+RUN python3.10 -m pip install "numpy<2"
 
 # Next, build the additional workspace 
 RUN cd ${WORKDIR} && mkdir humble_ws
