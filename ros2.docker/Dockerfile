@@ -79,7 +79,7 @@ RUN python3.10 -m pip install "numpy<2"
 # Next, build the additional workspace 
 RUN cd ${WORKDIR} && mkdir humble_ws
 COPY ../humble_ws humble_ws
-COPY ws.docker/entrypoint.sh /
+COPY ros2.docker/entrypoint.sh /
 ENV FASTRTPS_DEFAULT_PROFILES_FILE=/workspace/humble_ws/fastdds.xml
 ENV ROS_DISTRO=humble
 RUN /bin/bash -c "source /opt/ros/humble/setup.sh && cd humble_ws && rosdep install --from-paths src --ignore-src -r -y && colcon build --cmake-args ' -DPython3_EXECUTABLE=/usr/bin/python3.10' --merge-install"
