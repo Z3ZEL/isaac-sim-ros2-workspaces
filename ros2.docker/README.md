@@ -2,6 +2,8 @@
 
 This Dockerfile provide a ready-to-use ROS2 environment with already activated ROS2 bridge for IsaacSim
 
+> `ROS_DOMAIN_ID` is set to 24 by default you can change it in entrypoint.sh
+
 ## Usage
 
 ### Build the image

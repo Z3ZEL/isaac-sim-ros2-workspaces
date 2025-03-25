@@ -1,4 +1,9 @@
 # Changelog
+## [4.1.0] Rodriguez Esteban - 2025-03-11
+- Adding new isacsim_ros2 dockerfile workspace for isaacsim gui and ros2 bridge
+- Refacto ws -> ros2 
+- Added specific readme for each dockerfile
+
 ## [4.0.0] Rodriguez Esteban - 2025-03-11
 
 ### Changed
