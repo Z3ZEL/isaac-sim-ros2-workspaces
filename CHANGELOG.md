@@ -1,16 +1,17 @@
 # Changelog
-## [4.1.0] Rodriguez Esteban - 2025-03-11
-- Adding new isacsim_ros2 dockerfile workspace for isaacsim gui and ros2 bridge
-- Refacto ws -> ros2 
-- Added specific readme for each dockerfile
+## [4.4.0] Rodriguez Esteban - 2025-06-23
 
-## [4.0.0] Rodriguez Esteban - 2025-03-11
+### Added
+- New ros2_jazzy workspace for Isaac Sim 5.0 [Jazzy]
+- Refactoring of all workspaces, removing run_docker and build_docker scripts in each dir to make a global one
+- New common entrypoint script for all workspaces to run the docker image [Humble, Jazzy]
 
 ### Changed
-- Removing Noetic workspace
-- Added ws.docker for building the Docker image
-- Added fastdds for ROS2 Bridge with Isaac Sim
-- Updated Dockerfile for building the ROS2 workspace
+- Changing dockerfile for lighter layers and faster builds
+
+### Fixed
+- Fixed the --merge-install option required (not anymore) in the entrypoint script [Humble, Jazzy]
+
 ## [4.3.1] - 2025-06-11
 
 ### Changed
@@ -48,7 +49,18 @@
 
 ### Removed
 - Removed all Noetic packages and dockerfiles [Noetic]
+## [3.5.1] Rodriguez Esteban - 2025-03-11
+- Adding new isacsim_ros2 dockerfile workspace for isaacsim gui and ros2 bridge
+- Refacto ws -> ros2 
+- Added specific readme for each dockerfile
 
+## [3.5.0] Rodriguez Esteban - 2025-03-11
+
+### Changed
+- Removing Noetic workspace
+- Added ws.docker for building the Docker image
+- Added fastdds for ROS2 Bridge with Isaac Sim
+- Updated Dockerfile for building the ROS2 workspace
 ## [3.3.1] - 2025-01-24
 
 ### Changed

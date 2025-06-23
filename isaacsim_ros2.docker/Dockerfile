@@ -27,7 +27,6 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/r
 # setup environment
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-
 ENV ROS_DISTRO humble
 
 # install ros2 packages
@@ -43,18 +42,35 @@ RUN apt-get update && apt-get install -y \
 RUN add-apt-repository universe
 RUN /isaac-sim/python.sh -m pip install netifaces skyfield zfpy numba gdown pandas empy lark
 
+RUN apt update --fix-missing 
+
 # isaac ros2_bridge config
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/omni.isaac.ros2_bridge/humble/lib
 ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
 # setup entrypoint
 COPY ../humble_ws/fastdds.xml /etc/fastdds.xml
-COPY isaacsim_ros2.docker/entrypoint.sh /
-COPY isaacsim_ros2.docker/setup_ros2_ws.sh /usr/local/bin/setup_ros2_ws.sh
 
-RUN chmod +x /usr/local/bin/setup_ros2_ws.sh
-RUN echo "alias setup_ros2_ws='/usr/local/bin/setup_ros2_ws.sh'" >> /.bashrc
+WORKDIR /workspace
+RUN mkdir ros2_ws
+COPY ./humble_ws ros2_ws
+
+WORKDIR /workspace/ros2_ws
+RUN /bin/bash -c "source /opt/ros/humble/setup.sh && rosdep init && rosdep update && rosdep install --from-paths src --ignore-src -r -y"
+RUN /bin/bash -c "source /opt/ros/humble/setup.sh && colcon build"
 
 
+# Custom commands
+RUN echo 'rid() { export ROS_DOMAIN_ID=$1; }' >> ~/.bashrc
+RUN echo 'alias launch_isaacsim="/isaac-sim/isaac-sim.sh --allow-root"' >> ~/.bashrc
+COPY ../common/entrypoint.sh /
+
+RUN echo "echo '>>>>   [HUMBLE WS]   <<<<'" >> ~/.bashrc
+RUN echo "echo ' - rid <domain_id> to set ROS_DOMAIN_ID'" >> ~/.bashrc
+RUN echo "echo ' - launch_isaacsim to launch Isaac Sim'" >> ~/.bashrc
+RUN echo "export PS1='\[\e[1;32m\]\u\[\e[0m\]@\h:\w\$ '" >> ~/.bashrc
+
+
+ENV ENABLE_ISAAC=1
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
