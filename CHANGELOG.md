@@ -1,4 +1,9 @@
 # Changelog
+
+## 4.4.1 - 2025-06-23
+### Changed
+- Updated README.md and other documentation
+
 ## [4.4.0] Rodriguez Esteban - 2025-06-23
 
 ### Added
