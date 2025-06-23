@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Docker Workspace",
+            "type": "shell",
+            "command": "./build_docker.sh ${input:workspace}",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Run Docker Workspace",
+            "type": "shell",
+            "command": "./run_docker.sh ${input:workspace} ${input:extra_pkg_path}",
+            "problemMatcher": [],
+            "group": "test"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "workspace",
+            "type": "pickString",
+            "description": "Choisissez le workspace à utiliser",
+            "options": [
+                "ros2_humble",
+                "ros2_jazzy",
+                "isaacsim_humble"
+            ],
+            "default": "ros2_humble"
+        },
+        {
+            "id": "extra_pkg_path",
+            "type": "promptString",
+            "description": "Chemin absolu du package ROS2 à monter (laisser vide si aucun)",
+            "default": "",
+        }
+    ]
+}
